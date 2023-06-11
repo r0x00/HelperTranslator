@@ -3,11 +3,8 @@ import VBoxHeader from './VBoxHeader.vue';
 import VTextArea from './VTextArea.vue'
 import VTranslate from './VTranslate.vue';
 import { toast } from 'vue3-toastify';
-// import { toast, ToastOptions } from 'vue3-toastify';
 const { ipcRenderer } = window;
 
-
-// import { ipcRenderer } from 'electron';
 </script>
 
 <script>
@@ -19,7 +16,8 @@ export default {
             languageTranslated: {lang: "English", short: "en"},
             languageTitle: "Select Language",
             data: '',
-            dataTranslated: ''
+            dataTranslated: '',
+            load: false
         }
     },
 
@@ -46,6 +44,7 @@ export default {
             };
 
             if(!this.checkElectron()) {
+                this.load = false;
                 toast.error("You need use electron", {
                     autoClose: 3000,
                     position: toast.POSITION.TOP_RIGHT,
@@ -82,7 +81,7 @@ export default {
                 <VTranslate v-if="changeLanguageType === 'translate'" changeLanguageType="languageTranslate" @updateData="updateData" />
                 
 
-                <VTextArea v-if="!changeLanguageType || changeLanguageType === 'translate'" position="right" :dataTranslated="dataTranslated"/>
+                <VTextArea v-if="!changeLanguageType || changeLanguageType === 'translate'" position="right" :load="load" :dataTranslated="dataTranslated"/>
                 <VTranslate v-if="changeLanguageType === 'translated'" changeLanguageType="languageTranslated" @updateData="updateData" />
             </div>
         </div>
