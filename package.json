@@ -1,0 +1,28 @@
+{
+  "name": "translator",
+  "private": true,
+  "version": "0.0.0",
+  "main": "main.js",
+  "scripts": {
+    "vue:dev": "vite",
+    "vue:build": "vite build",
+    "vue:preview": "vite preview",
+    "electron:dev": "electron ."
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.4.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@fortawesome/vue-fontawesome": "^3.0.3",
+    "axios": "^1.4.0",
+    "font-awesome": "^4.7.0",
+    "os": "^0.1.2",
+    "util": "^0.12.5",
+    "vue": "^3.2.47",
+    "vue3-toastify": "^0.1.11"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.1.0",
+    "electron": "^24.3.1",
+    "vite": "^4.3.2"
+  }
+}
