@@ -1,18 +1,18 @@
 <script>
     export default {
-        props: ['position', 'languageTranslate', 'languageTranslated', 'dataTranslated', 'load'],
+        props: ['position', 'languageTranslate', 'languageTranslated', 'dataTranslated', 'loadData'],
         data() {
             return {
                 textArea: this.position == 'right' ? this.dataTranslated : '',
                 count: 0,
                 isTyping: undefined,
-                load: this.load
+                load: this.loadData
             }
         },
         methods: {
             textAreaChange () {
                 if(this.position == 'left') {
-                    this.$emit('updateData', { type: 'load', data: true });
+                    this.$emit('updateData', { type: 'loadData', data: true });
                 };
 
                 if(this.textArea == '') {
@@ -38,11 +38,11 @@
         watch: {
             'dataTranslated' (newVal, oldVal) {
                 if(oldVal != newVal) {
-                    this.load = false;
+                    this.$emit('updateData', { type: 'loadData', data:false });
                     this.textArea = newVal;
                 }
             },
-            'load' (newVal, oldVal) {
+            'loadData' (newVal, oldVal) {
                 if(oldVal != newVal) this.load = newVal
             }
         }
@@ -102,7 +102,7 @@
 }
 .position--relative:focus-within {
     outline: none;
-    border:1px solid #ff2929; ;
+    border:1px solid #ff2929;
 }
 .vtextarea--left {
     border-radius: 0 0 0 5px;

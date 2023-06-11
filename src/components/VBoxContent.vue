@@ -17,7 +17,7 @@ export default {
             languageTitle: "Select Language",
             data: '',
             dataTranslated: '',
-            load: false
+            loadData: false
         }
     },
 
@@ -81,7 +81,7 @@ export default {
                 <VTranslate v-if="changeLanguageType === 'translate'" changeLanguageType="languageTranslate" @updateData="updateData" />
                 
 
-                <VTextArea v-if="!changeLanguageType || changeLanguageType === 'translate'" position="right" :load="load" :dataTranslated="dataTranslated"/>
+                <VTextArea v-if="!changeLanguageType || changeLanguageType === 'translate'" position="right" :loadData="loadData" :dataTranslated="dataTranslated" @updateData="updateData"/>
                 <VTranslate v-if="changeLanguageType === 'translated'" changeLanguageType="languageTranslated" @updateData="updateData" />
             </div>
         </div>
