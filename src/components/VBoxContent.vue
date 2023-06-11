@@ -55,7 +55,7 @@ export default {
                 
                 return;
             };
-            
+
             ipcRenderer.send('translate', JSON.stringify(data));
             ipcRenderer.receive('translate', (value) => {
                 this.dataTranslated = value;
@@ -84,7 +84,7 @@ export default {
 
                 <VTextArea v-if="!changeLanguageType || changeLanguageType === 'translate'" position="right" :dataTranslated="dataTranslated"/>
                 <VTranslate v-if="changeLanguageType === 'translated'" changeLanguageType="languageTranslated" @updateData="updateData" />
-            </div>]
+            </div>
         </div>
     </div>
     
