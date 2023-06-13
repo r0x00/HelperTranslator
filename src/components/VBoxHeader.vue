@@ -9,6 +9,10 @@ export default {
     methods: {
         changeLanguage (type) {
             this.$emit('updateData', { type: 'changeLanguageType', data: type });
+        },
+        switchLanguage () {
+            this.$emit('updateData', { type: 'switchLanguage'})
+
         }
     }
 }
@@ -21,7 +25,7 @@ export default {
             <font-awesome-icon :icon="['fas', 'angle-down']" />
         </div>
 
-        <font-awesome-icon class="vselect--icon" :icon="['fas', 'arrow-right-arrow-left']" />
+        <font-awesome-icon @click="switchLanguage" class="vselect--icon" :icon="['fas', 'arrow-right-arrow-left']" />
 
         <div class="vselect" v-on:click="changeLanguage('translated')">
             <p class="vselect--name">{{ !languageTitleTranslated ? 'Select Language' : languageTitleTranslated }}</p>

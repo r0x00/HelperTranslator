@@ -17,7 +17,8 @@ export default {
             languageTitle: "Select Language",
             data: '',
             dataTranslated: '',
-            loadData: false
+            loadData: false,
+            mimetype: { mimetype: 'application/json', extension: 'json' },
         }
     },
 
@@ -31,11 +32,19 @@ export default {
             return true;
         },
         updateData (args) {
+            if(this.changeLanguageType && args.type == 'changeLanguageType') return this.changeLanguageType = undefined;
+
             this[args.type] = args.data;
 
             if(args.type == 'data') this.translate();
-        },
 
+            if(args.type == 'switchLanguage') {
+                const languageTranslated = this.languageTranslated;
+                this.languageTranslated = this.languageTranslate;
+                this.languageTranslate = languageTranslated;
+            };
+
+        },
         translate () {
             let data = {
                 languageTranslate: this.languageTranslate, 
@@ -44,8 +53,8 @@ export default {
             };
 
             if(!this.checkElectron()) {
-                this.load = false;
-                toast.error("You need use electron", {
+                this.loadData = false;
+                toast.error("You need use the electron app", {
                     autoClose: 3000,
                     position: toast.POSITION.TOP_RIGHT,
                     limit: 1,
@@ -65,6 +74,13 @@ export default {
                 // }
         
             });
+        },
+        fileUpload (e) {
+            const file = e.target.files;
+            // download file
+            // read file
+            // translate 
+
         }
 
     },
@@ -72,9 +88,20 @@ export default {
 </script>
 
 <template>
+
+    <!-- <div>
+        <div>   
+            <button class="file--upload" id="button" name="button" value="upload">
+                <font-awesome-icon :icon="['fas', 'note-sticky']" />
+                Translate Files
+                <input @change="fileUpload" type="file"/>
+            </button>
+        </div>
+    </div> -->
     
     <div class="center">
         <div class="vbox--content">
+            
             <VBoxHeader :languageTitleTranslate="languageTranslate && languageTranslate.lang" :languageTitleTranslated="languageTranslated && languageTranslated.lang"  :changeLanguageType="changeLanguageType" @updateData="updateData" />
             <div class="flex">
                 <VTextArea v-if="!changeLanguageType || changeLanguageType === 'translated'" position="left" :languageTranslate="languageTranslate" :languageTranslated="languageTranslated" @updateData="updateData"/>
@@ -115,5 +142,25 @@ export default {
     /* border:2px solid rgba(0,0,0,.8); */
     /* border: 1px solid rgba(0,0,0,.3); */
 }
+
+.file--upload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+}
+.file--upload input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+
+
 
 </style>

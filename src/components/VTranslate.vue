@@ -32,12 +32,14 @@ export default {
 </template>
 <style>
 .vtranslate {
-    border:1px solid rgba(0,0,0,.8);
+    /* font-size:18px; */
     width:100%;
-    height: 500px;
-    font-size:18px;
+    max-width: 600px;
+    background: none;
+    border:1px solid rgba(0,0,0,.8);
+    height: 50vh;
+    max-height: 500px;
     padding:25px;
-    display: grid;
 }
 .vtranslate ul {
     list-style: none;
@@ -45,8 +47,8 @@ export default {
     width: 100%;
     padding: 0;
     gap:10px;
-    grid-template-columns: repeat(auto-fill, minmax(1rem, 10rem));
-    grid-template-rows: repeat(auto-fill, 5rem);
+    grid-template-columns: repeat(auto-fill, minmax(1rem, 6.5rem));
+    grid-template-rows: repeat(auto-fill, 3rem);
     text-align: left; 
 }
 .vtranslate li:focus,

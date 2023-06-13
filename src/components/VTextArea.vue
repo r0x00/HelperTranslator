@@ -11,17 +11,19 @@
         },
         methods: {
             textAreaChange () {
+                if(this.position == 'right') return;
+
                 if(this.position == 'left') {
                     this.$emit('updateData', { type: 'loadData', data: true });
                 };
 
                 if(this.textArea == '') {
+                    this.$emit('updateData', { type: 'loadData', data: false });
                     this.$emit('updateData', { type: 'dataTranslated', data: this.textArea });
                     clearInterval(this.isTyping);
                     return;
                 };
                 
-
                 clearInterval(this.isTyping);
 
                 this.isTyping = setInterval(() => {
@@ -74,8 +76,6 @@
 
 .position--relative {
     position: relative;
-    /* border:1px solid rgba(0,0,0,.8);
-    width:100%; */
     width:100%;
     max-width: 600px;
     background: none;
@@ -83,20 +83,15 @@
     height: 50vh;
     max-height: 500px;
     padding:25px;
-    /* height: 500px; */
-
 }
 
 .vtextarea {
     resize: none;
-    
     width:100%;
     background: none;
     border: unset;
     height: max-content;
     outline: unset;
-    /* max-width: 600px; */
-    /* height: 500px; */
     font-size:20px;
     
 }

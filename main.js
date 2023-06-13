@@ -26,8 +26,8 @@ const main = function() {
 
     const createWindow = function () {
         const windowConfig = {
-            width: 800,
-            height: 600,
+            width: 900,
+            height: 450,
             webPreferences: {
                 devTools: true,
                 nodeIntegration: true,
@@ -40,10 +40,12 @@ const main = function() {
                 preload: path.join(__dirname, './tools/preload.js')
             },
             frame: false,
+        
         };
 
         const mainWindow = new BrowserWindow(windowConfig);
     
+        mainWindow.setResizable(false);
         // mainWindow.loadFile('index.html');
 
         mainWindow.webContents.openDevTools({ mode: 'undocked' });
