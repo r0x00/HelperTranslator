@@ -5,7 +5,6 @@ export default {
     data() {
         return {
             translations: [ 
-                { lang: "Autodetect", short: "Autodetect"},
                 { lang: "Portuguese", short: "pt"},
                 { lang: "English", short: "en"},
                 { lang: "Spanish", short: "es"},
@@ -14,11 +13,20 @@ export default {
         }
     },
     methods: {
+        load() {
+            if(this.changeLanguageType != 'languageTranslated') {
+                this.translations.unshift({ lang: "Autodetect", short: "Autodetect"});
+            }
+
+        },
         changeLanguage (type) {
             this.$emit('updateData', { type: this.changeLanguageType, data: type });
             this.$emit('updateData', { type: 'changeLanguageType', data: undefined });
         }
-    }
+    },
+    beforeMount() {
+        this.load();
+    },
 }
 </script>
 <template>
@@ -32,7 +40,6 @@ export default {
 </template>
 <style>
 .vtranslate {
-    /* font-size:18px; */
     width:100%;
     max-width: 600px;
     background: none;

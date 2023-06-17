@@ -40,7 +40,10 @@ export default {
 
             if(args.type == 'switchLanguage') {
                 const languageTranslated = this.languageTranslated;
-                this.languageTranslated = this.languageTranslate;
+
+                if(this.languageTranslate.lang == 'Autodetect') this.languageTranslated = { lang: "Portuguese", short: "pt"};
+                else this.languageTranslated = this.languageTranslate;
+                
                 this.languageTranslate = languageTranslated;
             };
 
@@ -113,7 +116,6 @@ export default {
             </div>
         </div>
     </div>
-    
 </template>
 
 <style>
