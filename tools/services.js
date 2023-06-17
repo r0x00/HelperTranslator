@@ -11,35 +11,44 @@ const services = {
         return true;
     },
     translateJSON: async (data, config) => {
-        async function getValues(data, config) {
-            return await new Promise(async (resolve) => {
-                for(const k of Object.keys(data)) {
-                    const v = data[k];
-
-                    if(v[Object.keys(v)[0]].length > 1) {
-                        await getValues(v, config);
-
-                        if(Object.keys(data)[Object.keys(data).length - 1] == k) resolve(data); 
-
-                        return;
-                    };
-
-                    config.value = v;
-
-                    const result = await services.translate(config);
+        try {
+            async function getValues(data, config) {
+                return await new Promise(async (resolve) => {
+                    for(const k of Object.keys(data)) {
+                        const v = data[k];
     
-                    data[k] = result; 
+                        if(v[Object.keys(v)[0]] && v[Object.keys(v)[0]].length > 1) {
+                            await getValues(v, config);
+    
+                            if(Object.keys(data)[Object.keys(data).length - 1] == k) resolve(data); 
+    
+                            return;
+                        };
+                        
+                        config.value = v;
+    
+                        const result =  typeof v == 'number' ? v :await services.translate(config);
+        
+                        data[k] = result; 
+    
+                        if(Object.keys(data)[Object.keys(data).length - 1] == k) resolve(data);                
+                        
+                    };
+                });
+                 // { "name": { "name" : "nome do teu chachorro", "age": "idade do teu cachorro", "humano": {"nome": "seu nome"}}}
+            }
+    
+            const result = await getValues(data, config)
+    
+            return result;
 
-                    if(Object.keys(data)[Object.keys(data).length - 1] == k) resolve(data);                
-                    
-                };
-            });
-             // { "name": { "name" : "nome do teu chachorro", "age": "idade do teu cachorro", "humano": {"nome": "seu nome"}}}
+        } catch(e) {
+            return {
+                data: 'error',
+                message: 'Ops... Something happened!'
+            };
         }
-
-        const result = await getValues(data, config)
-
-        return result;
+        
     },
     translate: async ({value, languageTranslate, languageTranslated}) => {
         const config = {
