@@ -75,9 +75,7 @@ const services = {
 
                 const result = await services.translateJSON(data, config);
 
-                console.log(result)
-
-                e.reply('translate', JSON.stringify(result));
+                e.reply('translate', JSON.stringify(result,  undefined, 4));
             } else {
                 const result = await services.translate(config)
 
