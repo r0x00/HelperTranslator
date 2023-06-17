@@ -70,12 +70,6 @@ export default {
             ipcRenderer.send('translate', JSON.stringify(data));
             ipcRenderer.receive('translate', (value) => {
                 this.dataTranslated = value;
-
-                // if(this.languageTranslate.short == 'Autodetect') {
-
-                //     // this.languageTranslate.lang = this.languageTranslate.short = value.respondeData.detectedLanguage;
-                // }
-        
             });
         },
         fileUpload (e) {
