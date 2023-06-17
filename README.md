@@ -1,7 +1,14 @@
-# Vue 3 + Vite
+# HelperTranslator
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This is a app to translate words or json values to another language. I used **Vue 3** and **electron** to build this.
+To translate the words, the api used was: **https://mymemory.translated.net/doc/spec.php**
 
-## Recommended IDE Setup
+## How use
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### Development
+- First install the dependencies with **npm i**
+- Start vue server with: **npm run vue:dev**
+- Start electron with: **npm run electron:dev**
+
+### Executable
+- run: **npm run package:linux**
