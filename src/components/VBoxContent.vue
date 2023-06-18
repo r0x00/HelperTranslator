@@ -19,6 +19,7 @@ export default {
             dataTranslated: '',
             loadData: false,
             mimetype: { mimetype: 'application/json', extension: 'json' },
+            clearData: false
         }
     },
 
@@ -33,6 +34,8 @@ export default {
         },
         updateData (args) {
             if(this.changeLanguageType && args.type == 'changeLanguageType') return this.changeLanguageType = undefined;
+
+            if(args.type == 'clearData') return this.clearData = !this.clearData;
 
             this[args.type] = args.data;
 
@@ -101,7 +104,7 @@ export default {
             
             <VBoxHeader :languageTitleTranslate="languageTranslate && languageTranslate.lang" :languageTitleTranslated="languageTranslated && languageTranslated.lang"  :changeLanguageType="changeLanguageType" @updateData="updateData" />
             <div class="flex">
-                <VTextArea v-if="!changeLanguageType || changeLanguageType === 'translated'" position="left" :languageTranslate="languageTranslate" :languageTranslated="languageTranslated" @updateData="updateData"/>
+                <VTextArea v-if="!changeLanguageType || changeLanguageType === 'translated'" position="left" :clearData="clearData" :languageTranslate="languageTranslate" :languageTranslated="languageTranslated" @updateData="updateData"/>
                 <VTranslate v-if="changeLanguageType === 'translate'" changeLanguageType="languageTranslate" @updateData="updateData" />
                 
 

@@ -1,12 +1,13 @@
 <script>
     export default {
-        props: ['position', 'languageTranslate', 'languageTranslated', 'dataTranslated', 'loadData'],
+        props: ['position', 'languageTranslate', 'languageTranslated', 'dataTranslated', 'loadData', 'clearData'],
         data() {
             return {
                 textArea: this.position == 'right' ? this.dataTranslated : '',
                 count: 0,
                 isTyping: undefined,
-                load: this.loadData
+                load: this.loadData,
+                clearData: this.clearData
             }
         },
         methods: {
@@ -46,6 +47,14 @@
             },
             'loadData' (newVal, oldVal) {
                 if(oldVal != newVal) this.load = newVal
+            },
+            'clearData' (newVal, oldVal) {
+                if(oldVal != newVal) {
+                    this.textArea = '';
+                    this.$emit('updateData', { type: 'loadData', data: false });
+                    this.$emit('updateData', { type: 'dataTranslated', data: this.textArea });
+                    clearInterval(this.isTyping);
+                }
             }
         }
     }

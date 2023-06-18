@@ -11,8 +11,10 @@ export default {
             this.$emit('updateData', { type: 'changeLanguageType', data: type });
         },
         switchLanguage () {
-            this.$emit('updateData', { type: 'switchLanguage'})
-
+            this.$emit('updateData', { type: 'switchLanguage'});
+        },
+        clearTextArea() {
+            this.$emit('updateData', { type: 'clearData' });
         }
     }
 }
@@ -20,9 +22,13 @@ export default {
 
 <template>
     <div class="vbox--header">
-        <div class="vselect" v-on:click="changeLanguage('translate')">
-            <p class="vselect--name">{{ !languageTitleTranslate ? 'Select Language' : languageTitleTranslate }}</p>
-            <font-awesome-icon :icon="['fas', 'angle-down']" />
+        <div class="vflex">
+            <div class="vselect" v-on:click="changeLanguage('translate')">
+                <p class="vselect--name">{{ !languageTitleTranslate ? 'Select Language' : languageTitleTranslate }}</p>
+                <font-awesome-icon :icon="['fas', 'angle-down']" />
+            </div>
+            <font-awesome-icon @click="clearTextArea" class="vselect--icon " :icon="['fas', 'trash']" />
+            
         </div>
 
         <font-awesome-icon @click="switchLanguage" class="vselect--icon" :icon="['fas', 'arrow-right-arrow-left']" />
@@ -60,5 +66,11 @@ export default {
 }
 .vselect--icon {
     cursor: pointer;
+}
+.vflex {
+    width:48%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 </style>
