@@ -46,12 +46,11 @@ const main = function() {
         const mainWindow = new BrowserWindow(windowConfig);
     
         mainWindow.setResizable(false);
-        // mainWindow.loadFile('index.html');
 
         mainWindow.webContents.openDevTools({ mode: 'undocked' });
 
         const url = "http://localhost:5173/"
-        // const url = (development) ? `http://localhost:5173/` : `file://${__dirname}/.tmp/index.html`;
+        
         mainWindow.loadURL(url);
 
         global.ipcRenderer = ipcRenderer;
